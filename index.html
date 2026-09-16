@@ -445,10 +445,10 @@ section{position:relative;padding-block:112px}
   background:linear-gradient(150deg,rgba(255,61,113,.16),rgba(255,138,0,.07));
   border-color:rgba(255,107,143,.36);justify-content:flex-start;
 }
-.tile.more{padding-top:24px}
-.tile.more::before{content:"";display:block;height:51px}
 .tile.more b{font-size:19px}
-.tile.more span{color:var(--grey)}
+.tile.more span{color:var(--white);opacity:.86}
+.tile.more .ico{background:linear-gradient(150deg,rgba(255,61,113,.3),rgba(255,138,0,.14));border-color:rgba(255,107,143,.5)}
+.tile.more .ico svg{color:#ffb0c4}
 
 /* ======================= FINAL ======================= */
 .final{
@@ -706,7 +706,6 @@ h1.mega,.triad,.final h2{
   .tile .ico svg{width:14px;height:14px}
   .tile b{font-size:13.5px;line-height:1.2}
   .tile span{margin-top:4px;font-size:11.5px;line-height:1.35}
-  .tile.more::before{height:37px}
   .tile.more b{font-size:15px}
   .more{margin-top:16px;font-size:14.5px}
 
@@ -789,55 +788,28 @@ h1.mega,.triad,.final h2{
           <linearGradient id="orb" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stop-color="#ff3d71"/><stop offset=".5" stop-color="#ff8a00"/><stop offset="1" stop-color="#ffb648"/>
           </linearGradient>
-          <!-- контур переливается: три остановки, смещаются анимацией -->
-          <linearGradient id="orbRim" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#ff2d6f">
-              <animate attributeName="stop-color" dur="7s" repeatCount="indefinite"
-                       values="#ff2d6f;#ffc23d;#ff7a1a;#ff2d6f"/>
-            </stop>
-            <stop offset=".5" stop-color="#ff7a1a">
-              <animate attributeName="stop-color" dur="7s" repeatCount="indefinite"
-                       values="#ff7a1a;#ff2d6f;#ffc23d;#ff7a1a"/>
-            </stop>
-            <stop offset="1" stop-color="#ffc23d">
-              <animate attributeName="stop-color" dur="7s" repeatCount="indefinite"
-                       values="#ffc23d;#ff7a1a;#ff2d6f;#ffc23d"/>
-            </stop>
-          </linearGradient>
-          <!-- внутренний объём: свет слева сверху, тень справа снизу -->
-          <radialGradient id="orbCore" cx="34%" cy="30%" r="78%">
-            <stop offset="0" stop-color="#ffc23d" stop-opacity=".30"/>
-            <stop offset=".45" stop-color="#ff2d6f" stop-opacity=".13"/>
-            <stop offset="1" stop-color="#ff2d6f" stop-opacity="0"/>
+          <!-- объём шара: свет слева сверху, темнее к нижнему правому краю -->
+          <radialGradient id="orbCore" cx="33%" cy="28%" r="82%">
+            <stop offset="0" stop-color="#ffc23d" stop-opacity=".22"/>
+            <stop offset=".5" stop-color="#ff5c3d" stop-opacity=".10"/>
+            <stop offset="1" stop-color="#ff2d6f" stop-opacity=".02"/>
           </radialGradient>
-          <radialGradient id="orbHalo" cx="50%" cy="50%" r="50%">
-            <stop offset=".62" stop-color="#ff7a1a" stop-opacity="0"/>
-            <stop offset=".84" stop-color="#ff4d85" stop-opacity=".26"/>
-            <stop offset="1" stop-color="#ff2d6f" stop-opacity="0"/>
+          <!-- мягкое свечение вокруг, без чёткой границы -->
+          <radialGradient id="orbAir" cx="50%" cy="50%" r="50%">
+            <stop offset=".5" stop-color="#ff7a1a" stop-opacity=".16"/>
+            <stop offset=".78" stop-color="#ff3d71" stop-opacity=".07"/>
+            <stop offset="1" stop-color="#ff3d71" stop-opacity="0"/>
           </radialGradient>
-          <filter id="orbGlow" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="2.6" result="b"/>
+          <filter id="orbGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="1.6" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
-          <clipPath id="orbclip"><circle cx="100" cy="100" r="80"/></clipPath>
+          <clipPath id="orbclip"><circle cx="100" cy="100" r="82"/></clipPath>
         </defs>
 
-        <!-- ореол вокруг: даёт ощущение, что шар светится изнутри -->
-        <circle cx="100" cy="100" r="99" fill="url(#orbHalo)"/>
-        <!-- объём внутри -->
-        <circle cx="100" cy="100" r="80" fill="url(#orbCore)"/>
-        <!-- сама сеть, со свечением -->
+        <circle cx="100" cy="100" r="100" fill="url(#orbAir)"/>
+        <circle cx="100" cy="100" r="82" fill="url(#orbCore)"/>
         <g clip-path="url(#orbclip)" id="orbnet" filter="url(#orbGlow)"></g>
-        <!-- контур: переливается и слегка дышит -->
-        <circle cx="100" cy="100" r="80" fill="none" stroke="url(#orbRim)" stroke-width="2.4" opacity=".92">
-          <animate attributeName="r" dur="9s" repeatCount="indefinite"
-                   values="80;82.4;80" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/>
-        </circle>
-        <!-- вторая, еле видимая окружность — воздух вокруг -->
-        <circle cx="100" cy="100" r="89" fill="none" stroke="url(#orb)" stroke-width=".6" opacity=".2">
-          <animate attributeName="r" dur="9s" repeatCount="indefinite"
-                   values="89;92;89" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/>
-        </circle>
       </svg>
     </div>
    </div>
@@ -985,7 +957,7 @@ h1.mega,.triad,.final h2{
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m12 2 3 6.5 7 .9-5 4.8 1.2 7-6.2-3.4L5.8 21 7 14.2 2 9.4l7-.9Z"/></svg></div><b>Лояльность</b><span>Баллы, промокоды, реферальные приглашения</span></div>
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div><b>Приём заявок</b><span>Ремонт, доставка, поддержка — со статусами</span></div>
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><b>Рабочий чат</b><span>Сказал в личку — легло в нужную тему команды</span></div>
-      <div class="tile more rv"><b class="grad">Твоя идея</b><span>расскажи — и она станет ботом</span></div>
+      <div class="tile more rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Z"/></svg></div><b class="grad">Твоя идея</b><span>расскажи — и она станет ботом</span></div>
     </div>
   </div>
 </section>
@@ -1018,7 +990,7 @@ h1.mega,.triad,.final h2{
   var orb = document.getElementById('orbnet');
   if (orb){
     var NS='http://www.w3.org/2000/svg', CX=100, CY=100, R=80;
-    var M=64, ga=Math.PI*(3-Math.sqrt(5)), base=[];
+    var M=110, ga=Math.PI*(3-Math.sqrt(5)), base=[];
     for (var n=0;n<M;n++){
       var yy=1-(n/(M-1))*2, rr=Math.sqrt(Math.max(0,1-yy*yy)), th=ga*n;
       base.push([Math.cos(th)*rr, yy, Math.sin(th)*rr]);
@@ -1048,7 +1020,7 @@ h1.mega,.triad,.final h2{
       var need=[];
       for (var a=0;a<pts.length;a++) for (var b=a+1;b<pts.length;b++){
         var dx=pts[a].x-pts[b].x, dy=pts[a].y-pts[b].y;
-        if (Math.sqrt(dx*dx+dy*dy) < 32) need.push([pts[a],pts[b]]);
+        if (Math.sqrt(dx*dx+dy*dy) < 26) need.push([pts[a],pts[b]]);
       }
       pool(lines,'line',need.length);
       for (var L=0;L<lines.length;L++){
@@ -1056,8 +1028,8 @@ h1.mega,.triad,.final h2{
           var p1=need[L][0], p2=need[L][1], d=(p1.z+p2.z)/2;
           lines[L].setAttribute('x1',p1.x.toFixed(1)); lines[L].setAttribute('y1',p1.y.toFixed(1));
           lines[L].setAttribute('x2',p2.x.toFixed(1)); lines[L].setAttribute('y2',p2.y.toFixed(1));
-          lines[L].setAttribute('stroke-width',(0.5+d*0.8).toFixed(2));
-          lines[L].setAttribute('opacity',(0.10+d*0.34).toFixed(2));
+          lines[L].setAttribute('stroke-width',(0.35+d*0.75).toFixed(2));
+          lines[L].setAttribute('opacity',(0.07+d*0.30).toFixed(2));
         } else lines[L].setAttribute('opacity','0');
       }
 
@@ -1066,8 +1038,8 @@ h1.mega,.triad,.final h2{
         if (D<pts.length){
           dots[D].setAttribute('cx',pts[D].x.toFixed(1));
           dots[D].setAttribute('cy',pts[D].y.toFixed(1));
-          dots[D].setAttribute('r',(1.1+pts[D].z*2.6).toFixed(2));
-          dots[D].setAttribute('opacity',(0.32+pts[D].z*0.62).toFixed(2));
+          dots[D].setAttribute('r',(0.8+pts[D].z*2.3).toFixed(2));
+          dots[D].setAttribute('opacity',(0.26+pts[D].z*0.68).toFixed(2));
         } else dots[D].setAttribute('opacity','0');
       }
     }
