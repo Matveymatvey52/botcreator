@@ -609,6 +609,118 @@ h1.mega,.triad,.final h2{
   .bub{max-width:92%}
 }
 
+
+/* =====================================================================
+   ТЕЛЕФОН  ≤ 640px — не сжатый десктоп, а своя раскладка.
+   Правило: экран маленький, поэтому всё компактнее, а не просто уже.
+   ===================================================================== */
+@media (max-width:640px){
+
+  body{font-size:15.5px;line-height:1.55}
+  .wrap{padding-inline:18px}
+  section{padding-block:44px}
+
+  /* --- шапка --- */
+  nav .bar{padding:10px 18px}
+  .logo .mark-svg{width:24px;height:24px}
+  .logo b{font-size:15px}
+  .nav-cta{padding:7px 13px;font-size:13px;border-radius:9px}
+
+  /* --- первый экран --- */
+  .hero{padding:78px 0 44px}
+  .hero-grid{grid-template-columns:1fr;gap:18px}
+  .hero-orb{order:-1}
+  .hero-orb svg{width:132px}                 /* было полэкрана — стало значок */
+  .hero-orb::before{width:150px;filter:blur(24px)}
+
+  h1.mega{font-size:27px;line-height:1.14;letter-spacing:-.6px;max-width:100%}
+  .lede{margin-top:14px;font-size:15.5px;max-width:100%}
+  .does{margin-top:12px;font-size:14px;max-width:100%}
+  .now{margin-top:18px;font-size:17px;max-width:100%;line-height:1.3}
+
+  .cta-row{margin-top:20px;gap:9px}
+  .btn{padding:12px 18px;font-size:14.5px;border-radius:11px;flex:1 1 auto;justify-content:center}
+  .btn svg{width:15px;height:15px}
+
+  /* метрики в столбик, но плотно */
+  .metrics{margin-top:28px;padding-top:16px;gap:14px;flex-direction:column}
+  .metric{padding-inline:0;margin-bottom:0}
+  .metric b{font-size:22px}
+  .metric span{margin-top:3px;font-size:12.5px}
+  .metric:not(:first-child)::before{display:none}
+
+  /* --- заголовки разделов --- */
+  .sec-head{max-width:100%}
+  .sec-head h2{font-size:24px;line-height:1.16;letter-spacing:-.5px}
+  .sec-head p{margin-top:12px;font-size:15px;max-width:100%}
+  .sec-head .mono{margin-bottom:12px;font-size:10.5px;letter-spacing:.12em}
+  .sec-head .mono::before{width:16px;margin-right:8px}
+
+  /* --- переписка --- */
+  .chat-layout{gap:16px}
+  .glass{border-radius:16px}
+  .chat{padding:14px}
+  .chat-head{padding-bottom:11px;margin-bottom:12px;gap:9px}
+  .chat-head .mark{width:28px;height:28px;border-radius:9px}
+  .chat-head b{font-size:14px}
+  .stream{gap:8px;min-height:0}
+  .bub{font-size:14px;padding:10px 13px;border-radius:14px;max-width:93%}
+  .bub.card b{font-size:14px}
+  .chips i{font-size:10px;padding:4px 8px}
+
+  .chat-side{gap:9px;padding-top:0}
+  .side-card{padding:14px;border-radius:13px}
+  .side-card b{font-size:15px;margin-bottom:5px}
+  .side-card p{font-size:14px}
+  .side-card .n{font-size:10px;margin-bottom:6px}
+
+  .strike{margin-top:26px;font-size:17px;line-height:1.3;max-width:100%}
+
+  /* --- перелом --- */
+  .pivot{padding-block:52px}
+  .pivot .imagine{font-size:16px;max-width:100%}
+  .triad{font-size:30px;margin-top:14px;letter-spacing:-1px;line-height:1.1}
+
+  /* --- аргументы --- */
+  .args{gap:11px}
+  .arg{padding:22px 18px;border-radius:17px;gap:12px}
+  .arg .lbl .num{font-size:9.5px;margin-bottom:7px;letter-spacing:.12em}
+  .arg .lbl h3{font-size:26px}
+  .arg .body h4{font-size:17px;max-width:100%;line-height:1.25}
+  .arg .body p{margin-top:11px;font-size:14.5px;max-width:100%}
+  .arg .ghost{font-size:58px;right:12px;top:10px}
+  .punch{margin-top:15px;padding-top:13px;font-size:15px}
+  .two-up{margin-top:14px;gap:9px;grid-template-columns:1fr}
+  .cost{padding:13px 15px;border-radius:12px}
+  .cost b{font-size:14px;margin-bottom:5px}
+  .cost p{font-size:14px}
+
+  /* --- плитки: две в ряд, компактные --- */
+  .tiles{margin-top:24px;gap:8px;grid-template-columns:1fr 1fr}
+  .tile{padding:14px 12px;border-radius:13px}
+  .tile .ico{width:28px;height:28px;border-radius:9px;margin-bottom:9px}
+  .tile .ico svg{width:14px;height:14px}
+  .tile b{font-size:13.5px;line-height:1.2}
+  .tile span{margin-top:4px;font-size:11.5px;line-height:1.35}
+  .tile.more b{font-size:15px}
+  .more{margin-top:16px;font-size:14.5px}
+
+  /* --- финал --- */
+  .final{padding-block:58px}
+  .final h2{font-size:26px;max-width:100%;line-height:1.16}
+  .final p{margin-top:14px;font-size:15px}
+  .final .cta-row{margin-top:22px}
+
+  footer{padding-block:22px;font-size:10px;gap:8px;flex-direction:column;align-items:flex-start}
+}
+
+/* очень узкие экраны — плитки в один столбец */
+@media (max-width:360px){
+  .tiles{grid-template-columns:1fr}
+  h1.mega{font-size:25px}
+  .triad{font-size:27px}
+}
+
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   html{scroll-behavior:auto}
