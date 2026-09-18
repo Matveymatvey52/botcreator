@@ -159,24 +159,34 @@ h1.mega{
 }
 h1.mega .w{display:inline-block;will-change:transform,opacity}
 
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:13px;letter-spacing:.08em;
+  color:var(--iris-hi);text-transform:uppercase;margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(112deg,var(--iris),var(--violet));flex:none}
+
 .lede{
   margin-top:26px;max-width:54ch;
-  font-size:clamp(17px,2vw,20.5px);color:var(--grey);font-weight:300;
+  font-size:clamp(19px,2.3vw,23.5px);color:var(--grey);font-weight:300;line-height:1.5;
 }
 .lede b{color:var(--white);font-weight:500}
 
 .does{
-  margin-top:20px;max-width:58ch;
-  font-size:16.5px;color:var(--dim);
+  margin-top:22px;max-width:54ch;
+  font-size:clamp(17px,1.9vw,19.5px);color:var(--dim);line-height:1.5;
 }
+.does b{color:var(--grey);font-weight:500}
 
 .now{
   margin-top:36px;
   font-family:var(--display);font-weight:600;
-  font-size:clamp(19px,2.6vw,26px);line-height:1.3;max-width:22ch;
+  font-size:clamp(22px,3.1vw,31px);line-height:1.25;max-width:24ch;
 }
 
 .cta-row{margin-top:40px;display:flex;gap:13px;flex-wrap:wrap;align-items:center}
+.reassure{margin-top:16px;font-size:14.5px;color:var(--dim);letter-spacing:.01em}
 .btn{
   display:inline-flex;align-items:center;gap:10px;
   padding:15px 28px;border-radius:13px;cursor:pointer;
@@ -194,6 +204,13 @@ h1.mega .w{display:inline-block;will-change:transform,opacity}
 .btn-ghost{border-color:var(--edge-2);color:var(--white);background:rgba(28,26,35,.5)}
 .btn-ghost:hover{border-color:var(--iris-hi);transform:translateY(-2px);background:rgba(255,61,113,.1)}
 .btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.btn-link{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:15px 4px;color:var(--grey);font-family:var(--body);font-weight:500;font-size:15.5px;
+  text-decoration:underline;text-decoration-color:var(--edge-2);text-underline-offset:4px;
+  transition:color .2s,text-decoration-color .2s;
+}
+.btn-link:hover{color:var(--white);text-decoration-color:var(--iris-hi)}
 
 /* metrics strip */
 .metrics{
@@ -337,6 +354,16 @@ section{position:relative;padding-block:112px}
 .side-card b{display:block;font-family:var(--display);font-size:17px;font-weight:600;margin-bottom:7px}
 .side-card p{color:var(--grey);font-size:15.5px;font-weight:300}
 
+.outcome{
+  margin-top:20px;max-width:56ch;
+  font-size:16.5px;color:var(--grey);font-weight:300;line-height:1.55;
+}
+.outcome b{color:var(--white);font-weight:500}
+.after-tiles{
+  margin-top:26px;text-align:center;
+  font-size:17px;color:var(--dim);font-weight:300;
+}
+.after-tiles b{color:var(--white);font-weight:500}
 .strike{
   margin-top:46px;font-family:var(--display);font-weight:600;
   font-size:clamp(20px,3vw,29px);line-height:1.32;max-width:26ch;
@@ -638,11 +665,14 @@ h1.mega,.triad,.final h2{
   .hero-orb::before{width:190px;filter:blur(28px)}
 
   h1.mega{font-size:35px;line-height:1.1;letter-spacing:-1.1px;max-width:100%}
-  .lede{margin-top:14px;font-size:15.5px;max-width:100%}
-  .does{margin-top:12px;font-size:14px;max-width:100%}
-  .now{margin-top:18px;font-size:17px;max-width:100%;line-height:1.3}
+  .lede{margin-top:14px;font-size:17.5px;max-width:100%;line-height:1.45}
+  .eyebrow{font-size:11px;margin-bottom:12px}
+  .does{margin-top:14px;font-size:16px;max-width:100%;line-height:1.45}
+  .now{margin-top:20px;font-size:20.5px;max-width:100%;line-height:1.25}
 
-  .cta-row{margin-top:20px;gap:9px}
+  .cta-row{margin-top:20px;gap:9px;row-gap:14px}
+  .reassure{margin-top:12px;font-size:13px}
+  .btn-link{flex:1 1 100%;justify-content:center;padding:6px 4px;font-size:14px}
   .btn{padding:12px 18px;font-size:14.5px;border-radius:11px;flex:1 1 auto;justify-content:center}
   .btn svg{width:15px;height:15px}
 
@@ -679,6 +709,8 @@ h1.mega,.triad,.final h2{
   .side-card .n{font-size:10px;margin-bottom:6px}
 
   .strike{margin-top:26px;font-size:17px;line-height:1.3;max-width:100%}
+  .outcome{margin-top:14px;font-size:14.5px;max-width:100%}
+  .after-tiles{margin-top:18px;font-size:14.5px}
 
   /* --- перелом --- */
   .pivot{padding-block:52px}
@@ -758,7 +790,8 @@ h1.mega,.triad,.final h2{
   <div class="wrap">
    <div class="hero-grid">
     <div class="hero-text">
-    <h1 class="mega" id="head">Опиши, что ты хочешь.<br><span class="grad">Получи готовый продукт.</span></h1>
+    <div class="eyebrow">Результат разговора — рабочий бот</div>
+    <h1 class="mega" id="head">Опиши, что ты хочешь.<br><span class="grad">Получи готового бота.</span></h1>
 
     <p class="lede">
       Ты рассказываешь в Telegram, какой бот тебе нужен — текстом или голосом,
@@ -766,19 +799,21 @@ h1.mega,.triad,.final h2{
     </p>
 
     <p class="does">
-      Принимает клиентов, ведёт записи, берёт оплату картой, считает выручку,
-      напоминает, отправляет файлы, собирает заявки — всё, что ты попросишь.
+      Телефон разрывается во время работы, заказы теряются в переписке, одно и то же
+      каждый день руками — <b>бот забирает это себе.</b>
     </p>
 
-    <p class="now">Готовый продукт, которым можно пользоваться <span class="grad">прямо сейчас</span>.</p>
+    <p class="now">Не макет и не демо — <span class="grad">бот, который работает без тебя</span> прямо сейчас.</p>
 
     <div class="cta-row">
       <a class="btn btn-primary" href="https://t.me/boticsCREATOR_bot">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
-        Создать бота
+        Создать бота в Telegram
       </a>
-      <a class="btn btn-ghost" href="#how">Посмотреть, как это</a>
+      <a class="btn-link" href="#how">Посмотреть пример ↓</a>
     </div>
+
+    <p class="reassure">Без кода · без техзадания · без программиста</p>
     </div>
 
     <div class="hero-orb">
@@ -831,7 +866,7 @@ h1.mega,.triad,.final h2{
 
     <div class="metrics">
       <div class="metric"><b class="grad">15 минут</b><span>до рабочего бота</span></div>
-      <div class="metric"><b class="grad">500+</b><span>готовых элементов — твой бот собран из них</span></div>
+      <div class="metric"><b class="grad">Готовый бот</b><span>с оплатой, базой клиентов и приложением</span></div>
       <div class="metric"><b class="grad">0 строк кода</b><span>ты не напишешь и не увидишь</span></div>
     </div>
   </div>
@@ -841,9 +876,9 @@ h1.mega,.triad,.final h2{
 <section class="chat-sec" id="how">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="mono">Как это происходит</span>
-      <h2>Всё, что от тебя нужно&nbsp;—<br>рассказать.</h2>
-      <p>Уточню детали, чтобы увидеть картину целиком, — и ухожу работать.</p>
+      <span class="mono">От идеи до бота — один разговор</span>
+      <h2>Вот что ты получишь<br>на выходе.</h2>
+      <p>Рассказываешь задачу обычными словами. Бот уточняет детали — и собирает решение.</p>
     </div>
 
     <div class="chat-layout">
@@ -871,7 +906,7 @@ h1.mega,.triad,.final h2{
         <div class="side-card">
           <div class="n">03</div>
           <b>Бот открывается и работает</b>
-          <p>Со своей базой и мини-приложением внутри Telegram — весь функционал уже на месте.</p>
+          <p>Со своей базой и приложением внутри Telegram. Всё уже на месте.</p>
         </div>
       </div>
     </div>
@@ -879,6 +914,11 @@ h1.mega,.triad,.final h2{
     <p class="strike rv">
       <s>Ни кода. Ни серверов. Ни настроек.</s>
       Ничего из этого для тебя просто не существует.
+    </p>
+
+    <p class="outcome rv">
+      На руках у тебя <b>бот в Telegram</b> и <b>приложение к нему</b>, где видно всё,
+      что он наработал: клиентов, записи, заявки, деньги.
     </p>
   </div>
 </section>
@@ -888,8 +928,8 @@ h1.mega,.triad,.final h2{
   <div class="wrap">
     <p class="imagine rv">Представь, что можешь вайб-кодить прямо в Telegram.</p>
     <h2 class="triad" id="triad">
-      <span class="line"><span class="thin">Только</span>&nbsp;<span class="pair"><span class="grad">быстрее</span><span class="thin">,</span></span> <span class="grad">качественнее</span></span>
-      <span class="line"><span class="thin">и</span>&nbsp;<span class="pair"><span class="grad">дешевле</span><span class="thin">.</span></span></span>
+      <span class="line"><span class="thin">Только</span>&nbsp;<span class="pair"><span class="grad">быстрее</span><span class="thin">,</span></span> <span class="grad">без кода</span></span>
+      <span class="line"><span class="thin">и</span>&nbsp;<span class="pair"><span class="grad">доступнее</span><span class="thin">.</span></span></span>
     </h2>
   </div>
 </section>
@@ -906,9 +946,9 @@ h1.mega,.triad,.final h2{
           <h3 class="grad">Быстрее</h3>
         </div>
         <div class="body">
-          <h4>Пятнадцать минут&nbsp;— и у тебя реально рабочий продукт.</h4>
-          <p>Не набросок, который ещё доводить. Не проект, который ещё где-то запускать.</p>
-          <p class="punch">Продукт, который <span class="grad">уже полноценно работает</span>.</p>
+          <h4>Пятнадцать минут&nbsp;— и бот принимает первого клиента.</h4>
+          <p>Не набросок, который ещё доводить. Не проект, который ещё где-то запускать. Ждать разработки неделями не придётся.</p>
+          <p class="punch">Бот, который <span class="grad">уже полноценно работает</span>.</p>
         </div>
       </article>
 
@@ -916,13 +956,13 @@ h1.mega,.triad,.final h2{
         <span class="ghost">02</span>
         <div class="lbl">
           <span class="num">АРГУМЕНТ 02</span>
-          <h3 class="grad">Качественнее</h3>
+          <h3 class="grad">Без кода</h3>
         </div>
         <div class="body">
-          <h4>С первого раза.<br>Без «ну почти».</h4>
-          <p>Все детали твоего будущего продукта уже кучу раз отточены и проверены на реальных кейсах.</p>
-          <p>Тебе не придётся собирать ничего с нуля — <strong>все элементы уже готовы</strong>, их остаётся только соединить вместе под твою задачу.</p>
-          <p class="punch">Поэтому у тебя не бывает «работает, но не до конца».<br><span class="grad nowrap">Сразу целиком, с первого раза.</span></p>
+          <h4>Разбираться в разработке<br>не нужно.</h4>
+          <p>Ты описываешь задачу обычным языком — как объяснил бы её человеку. Ни строчки кода, ни техзадания.</p>
+          <p>Собирать с нуля тоже не придётся: <strong>все элементы уже готовы и проверены на живых ботах</strong>, их остаётся соединить под твою задачу.</p>
+          <p class="punch">Поэтому бот приходит собранным целиком&nbsp;— <span class="grad nowrap">а не «работает, но не до конца»</span>.</p>
         </div>
       </article>
 
@@ -930,10 +970,10 @@ h1.mega,.triad,.final h2{
         <span class="ghost">03</span>
         <div class="lbl">
           <span class="num">АРГУМЕНТ 03</span>
-          <h3 class="grad">Дешевле</h3>
+          <h3 class="grad">Доступнее</h3>
         </div>
         <div class="body">
-          <h4>Дешевле обоих привычных путей.</h4>
+          <h4>Одна подписка вместо разработки с нуля.</h4>
           <div class="two-up">
             <div class="cost">
               <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg> Собирать самому</b>
@@ -958,15 +998,16 @@ h1.mega,.triad,.final h2{
   <div class="wrap">
     <div class="sec-head rv">
       <span class="mono">Что собирают здесь</span>
-      <h2>Каждый из них собран<br>одним разговором.</h2>
+      <h2>Какого бота<br>можно создать?</h2>
+      <p>Практически любого под твою задачу: консультант, продажи, заявки, оплаты, документы, подписки&nbsp;— или твой собственный сценарий.</p>
     </div>
 
     <div class="tiles" id="tiles">
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></div><b>ИИ-консультант</b><span>Отвечает клиентам по твоим документам, как живой эксперт</span></div>
+      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></div><b>ИИ-консультант</b><span>Читает твои документы и отвечает клиентам, как живой эксперт</span></div>
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3Z"/></svg></div><b>Умная воронка продаж</b><span>Ведёт клиента по шагам и сам подводит к покупке</span></div>
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5M12 18v-6M9 15l3 3 3-3"/></svg></div><b>Продажа гайдов</b><span>Оплатил — файл пришёл сразу, без тебя</span></div>
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><b>Курс с домашками</b><span>Сам видит, кто сдал и уложился в срок, проверяет файлы и ставит оценки</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg></div><b>Голосовой секретарь</b><span>Наговорил задачи — легли по темам и исполнителям в структурированном виде</span></div>
+      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg></div><b>Голосовой секретарь</b><span>Наговорил задачи — они легли по темам и исполнителям</span></div>
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10Z"/></svg></div><b>Сбор лидов с сайта</b><span>Заявка с формы на сайте сразу прилетает в Telegram</span></div>
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg></div><b>Викторина с баллами</b><span>Проверяет знания и сам считает результат каждого участника</span></div>
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><b>Подписка на контент</b><span>Оплатил — получил доступ к материалам, без ручной выдачи</span></div>
@@ -975,6 +1016,10 @@ h1.mega,.triad,.final h2{
       <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div><b>Проверка подписки на канал</b><span>Пускает к контенту или выдаёт промокод на скидку только тем, кто подписан</span></div>
       <div class="tile more rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Z"/></svg></div><b class="grad">Твоя идея</b><span>расскажи — и она станет ботом</span></div>
     </div>
+
+    <p class="after-tiles rv">
+      Не нашёл подходящего варианта? <b>Расскажи свою идею&nbsp;— бот соберёт её под тебя.</b>
+    </p>
   </div>
 </section>
 
