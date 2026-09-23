@@ -105,7 +105,7 @@ nav .bar{
 .nav-cta:hover{border-color:var(--iris-hi);background:rgba(255,61,113,.12);transform:translateY(-1px)}
 
 /* ======================= HERO ======================= */
-.hero{position:relative;padding:126px 0 84px;overflow:hidden}
+.hero{position:relative;padding:108px 0 64px;overflow:hidden}
 .aurora{
   position:absolute;inset:-30% -20% auto -20%;height:132%;
   pointer-events:none;z-index:0;
@@ -153,9 +153,10 @@ nav .bar{
 }
 
 h1.mega{
-  font-size:clamp(36px,5.4vw,64px);
-  max-width:21ch;
+  font-size:clamp(34px,4.5vw,56px);
+  max-width:none;
   line-height:1.04;
+  text-wrap:balance;
 }
 h1.mega .w{display:inline-block;will-change:transform,opacity}
 
@@ -168,7 +169,7 @@ h1.mega .w{display:inline-block;will-change:transform,opacity}
   background:linear-gradient(112deg,var(--iris),var(--violet));flex:none}
 
 .lede{
-  margin-top:26px;max-width:54ch;
+  margin-top:16px;max-width:50ch;
   font-size:clamp(19px,2.3vw,23.5px);color:var(--grey);font-weight:300;line-height:1.5;
 }
 .lede b{color:var(--white);font-weight:500}
@@ -185,8 +186,76 @@ h1.mega .w{display:inline-block;will-change:transform,opacity}
   font-size:clamp(22px,3.1vw,31px);line-height:1.25;max-width:24ch;
 }
 
-.cta-row{margin-top:40px;display:flex;gap:13px;flex-wrap:wrap;align-items:center}
-.reassure{margin-top:16px;font-size:14.5px;color:var(--dim);letter-spacing:.01em}
+/* одна строка результата под подводкой */
+.result-line{
+  margin:18px 0 0;display:flex;gap:11px;align-items:flex-start;max-width:46ch;
+  font-size:clamp(16px,1.7vw,17.5px);color:var(--white);font-weight:400;
+}
+.tick{float:left;margin:2px 9px 0 0}
+.example-out b{color:var(--white);font-weight:500}
+.tick{
+  display:block;flex:none;width:21px;height:21px;border-radius:50%;margin-top:2px;
+  background:linear-gradient(140deg,var(--iris),var(--cyan));
+  position:relative;
+}
+.tick::after{
+  content:"";position:absolute;left:5.5px;top:5px;width:7px;height:4px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg);
+}
+
+/* ── лента живых примеров ── */
+.who-sec{border-top:1px solid var(--edge);overflow:hidden}
+.who-sec h2{font-size:clamp(30px,4.6vw,50px);line-height:1.07;margin-top:14px}
+.who-lede{
+  margin:14px 0 0;max-width:52ch;
+  font-size:clamp(16.5px,1.85vw,19px);color:var(--grey);line-height:1.55;
+}
+
+.rail{margin:clamp(34px,4.4vw,50px) 0 clamp(28px,3.6vw,40px);display:grid;gap:14px}
+.rail-row{overflow:hidden;padding-block:8px;margin-block:-8px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.rail-track{
+  display:flex;gap:14px;width:max-content;
+  animation:railmove 52s linear infinite;
+}
+.rail-row[data-dir="-1"] .rail-track{animation-direction:reverse}
+.rail-row:hover .rail-track{animation-play-state:paused}
+@keyframes railmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.case{
+  flex:none;width:min(370px,78vw);
+  padding:20px 22px 18px;border-radius:17px;
+  background:linear-gradient(166deg,rgba(28,26,35,.9),rgba(15,14,20,.86));
+  border:1px solid var(--edge);
+  transition:border-color .25s,transform .25s cubic-bezier(.2,.8,.3,1);
+}
+.case:hover{border-color:rgba(255,107,143,.34);transform:translateY(-3px)}
+.case-say::before{content:""}
+.case-say{
+  margin:0;font-size:16.5px;line-height:1.48;color:var(--white);font-weight:400;
+  position:relative;padding-left:15px;
+}
+.case-say::before{
+  content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--iris),var(--cyan));
+}
+.case-got{
+  margin:14px 0 0;padding-top:12px;border-top:1px solid var(--edge);
+  font-size:14.5px;color:var(--dim);line-height:1.5;
+}
+.case-got b{
+  display:inline-block;color:var(--white);font-family:var(--display);
+  font-weight:600;font-size:15.5px;margin-right:2px;
+}
+
+.who-more{
+  margin:0 0 22px;max-width:56ch;
+  font-size:16.5px;color:var(--grey);line-height:1.55;
+}
+.who-more b{color:var(--white);font-weight:500}
+.who-cta{padding:17px 32px;font-size:16.5px}
+
+.cta-row{margin-top:22px;display:flex;gap:13px;flex-wrap:wrap;align-items:center}
+.reassure{margin-top:13px;font-size:14.5px;color:var(--dim);letter-spacing:.01em}
 .btn{
   display:inline-flex;align-items:center;gap:10px;
   padding:15px 28px;border-radius:13px;cursor:pointer;
@@ -201,6 +270,16 @@ h1.mega .w{display:inline-block;will-change:transform,opacity}
   box-shadow:0 10px 34px rgba(255,61,113,.36);
 }
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(255,61,113,.5)}
+/* на первом экране главная кнопка крупнее остальных — глаз находит её сразу */
+.cta-row .btn-primary{
+  padding:19px 36px;font-size:17.5px;border-radius:15px;
+  box-shadow:0 14px 40px rgba(255,61,113,.42);
+}
+.cta-row .btn-primary,.final .btn-primary{animation:breathe 3.6s ease-in-out infinite 1.4s}
+@keyframes breathe{
+  0%,100%{box-shadow:0 14px 40px rgba(255,61,113,.42)}
+  50%{box-shadow:0 14px 56px rgba(255,61,113,.62),0 0 0 6px rgba(255,107,143,.08)}
+}
 .btn-ghost{border-color:var(--edge-2);color:var(--white);background:rgba(28,26,35,.5)}
 .btn-ghost:hover{border-color:var(--iris-hi);transform:translateY(-2px);background:rgba(255,61,113,.1)}
 .btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
@@ -213,15 +292,34 @@ h1.mega .w{display:inline-block;will-change:transform,opacity}
 .btn-link:hover{color:var(--white);text-decoration-color:var(--iris-hi)}
 
 /* metrics strip */
+/* полоса цифр: одна стеклянная панель, свет идёт за курсором */
 .metrics{
-  margin-top:66px;display:flex;gap:52px;flex-wrap:wrap;
-  padding-top:28px;border-top:1px solid var(--edge);
+  margin-top:64px;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  border-radius:22px;border:1px solid var(--edge);
+  background:linear-gradient(168deg,rgba(28,26,35,.72),rgba(14,13,19,.6));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 30px 80px rgba(0,0,0,.45);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  --mx:50%;--my:50%;
 }
+.metrics::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(420px circle at var(--mx) var(--my),rgba(255,107,143,.16),transparent 62%);
+  transition:opacity .4s ease;
+}
+.metrics:hover::before{opacity:1}
+.metrics::after{
+  content:"";position:absolute;left:8%;right:8%;top:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,138,0,.7),rgba(255,61,113,.7),transparent);
+}
+.metric{position:relative;padding:30px 34px 32px}
+.metric:not(:first-child){border-left:1px solid var(--edge)}
 .metric b{
   display:block;font-family:var(--display);font-weight:800;
-  font-size:clamp(26px,3.4vw,36px);letter-spacing:-.03em;line-height:1;
+  font-size:clamp(28px,3.3vw,42px);letter-spacing:-.035em;line-height:1;
+  font-variant-numeric:tabular-nums;
 }
-.metric span{display:block;margin-top:8px;font-size:13.5px;color:var(--dim)}
+.metric > span{display:block;margin-top:12px;font-size:14.5px;color:var(--grey);line-height:1.45;max-width:26ch}
 
 
 /* ======= ЛОГОТИП И СФЕРА ======= */
@@ -259,9 +357,9 @@ section{position:relative;padding-block:112px}
 /* ======================= CHAT ======================= */
 .chat-sec{border-top:1px solid var(--edge)}
 .chat-layout{
-  margin-top:54px;display:grid;gap:30px;
+  margin-top:54px;display:grid;gap:clamp(30px,5vw,68px);
   grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-  align-items:start;
+  align-items:center;
 }
 .glass{
   position:relative;border-radius:22px;
@@ -342,17 +440,41 @@ section{position:relative;padding-block:112px}
 .typing span:nth-child(3){animation-delay:.36s}
 @keyframes blink{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 
-.chat-side{display:flex;flex-direction:column;gap:14px;padding-top:6px}
-.side-card{
-  padding:22px;border-radius:17px;
-  background:var(--panel);border:1px solid var(--edge);
+/* путь из трёх шагов: одна линия, а не три коробки */
+.path{list-style:none;margin:0;padding:10px 0 0;counter-reset:st;position:relative}
+.path li{position:relative;padding:0 0 38px 64px;counter-increment:st}
+.path li:last-child{padding-bottom:0}
+/* линия идёт отрезками от кружка к кружку и не уходит хвостом за последний */
+.path li:not(:last-child)::after{
+  content:"";position:absolute;left:19px;top:44px;bottom:2px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--iris),var(--cyan));opacity:.5;
 }
-.side-card .n{
-  font-family:var(--mono);font-size:11px;color:var(--iris-hi);
-  letter-spacing:.14em;margin-bottom:10px;
+.path li::before{
+  content:counter(st,decimal-leading-zero);
+  position:absolute;left:0;top:-2px;width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--white);
+  background:var(--deep);border:1px solid var(--edge-2);
+  box-shadow:0 0 0 6px var(--void);
 }
-.side-card b{display:block;font-family:var(--display);font-size:17px;font-weight:600;margin-bottom:7px}
-.side-card p{color:var(--grey);font-size:15.5px;font-weight:300}
+.path li.done::before{
+  content:"";border:0;
+  background:linear-gradient(140deg,var(--iris),var(--cyan));
+  box-shadow:0 0 0 6px var(--void),0 0 26px rgba(255,61,113,.5);
+}
+.path li.done::after{
+  content:"";position:absolute;left:14px;top:11px;width:11px;height:6px;
+  border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg);
+}
+.path b{
+  display:block;font-family:var(--display);font-weight:600;
+  font-size:clamp(19px,2vw,22px);letter-spacing:-.015em;line-height:1.25;margin:6px 0 8px;
+}
+.path li.done b{
+  background:linear-gradient(100deg,var(--iris-hi),var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.path p{margin:0;color:var(--grey);font-size:16px;font-weight:300;line-height:1.58;max-width:40ch}
 
 .outcome{
   margin-top:20px;max-width:56ch;
@@ -521,7 +643,7 @@ h1.mega,.triad,.final h2{
 @keyframes sheen{to{left:130%}}
 
 /* панели: настоящее стекло + внутренний свет по верхней кромке */
-.glass,.arg,.tile,.side-card,.cost{
+.glass,.arg,.tile,.cost{
   background-image:linear-gradient(180deg,rgba(255,255,255,.035),transparent 42%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 22px 60px rgba(0,0,0,.55);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -548,16 +670,9 @@ h1.mega,.triad,.final h2{
 }
 
 /* метрики: разделители-волоски между цифрами */
-.metrics{gap:0}
-.metric{padding-inline:44px;position:relative}
-.metric:first-child{padding-left:0}
-.metric:not(:first-child)::before{
-  content:"";position:absolute;left:0;top:4px;bottom:4px;width:1px;
-  background:linear-gradient(180deg,transparent,var(--edge-2),transparent);
-}
 @media (max-width:780px){
-  .metric{padding-inline:0;flex:1 1 100%;margin-bottom:18px}
-  .metric:not(:first-child)::before{display:none}
+  .metrics{grid-template-columns:1fr}
+  .metric:not(:first-child){border-left:0;border-top:1px solid var(--edge)}
 }
 
 /* заголовки разделов — крупнее и увереннее */
@@ -634,7 +749,7 @@ h1.mega,.triad,.final h2{
   .arg{grid-template-columns:1fr;padding:32px;gap:18px}
   section{padding-block:84px}
   .hero{padding:124px 0 72px}
-  .metrics{gap:32px;margin-top:48px}
+  .metrics{margin-top:48px}
   .pivot{padding-block:96px}
   .final{padding-block:104px}
   .bub{max-width:92%}
@@ -646,6 +761,22 @@ h1.mega,.triad,.final h2{
    Правило: экран маленький, поэтому всё компактнее, а не просто уже.
    ===================================================================== */
 @media (max-width:640px){
+
+  /* новые блоки: пример и «кому пригодится» */
+  .cta-row .btn-primary{width:100%;justify-content:center;padding:17px 22px;font-size:16.5px}
+  .cta-row .btn-primary,.final .btn-primary{animation:none}
+  .result-line{font-size:15px;align-items:flex-start}
+  .result-line .tick{margin-top:1px}
+  .rail{margin:26px 0 22px;gap:11px}
+  .case{width:min(300px,82vw);padding:17px 18px 15px;border-radius:14px}
+  .case-say{font-size:15.5px}
+  .case-got{font-size:13.5px;margin-top:12px;padding-top:10px}
+  .case-got b{font-size:14.5px}
+  .who-lede{font-size:16px}
+  .who-sec h2{font-size:25px;line-height:1.15}
+  .who-more{font-size:15.5px;margin-bottom:18px}
+  .who-cta{width:100%;justify-content:center;padding:16px 22px;font-size:16px}
+  .rail-track{animation-duration:38s}
 
   body{font-size:15.5px;line-height:1.55}
   .wrap{padding-inline:18px}
@@ -677,11 +808,10 @@ h1.mega,.triad,.final h2{
   .btn svg{width:15px;height:15px}
 
   /* метрики в столбик, но плотно */
-  .metrics{margin-top:28px;padding-top:16px;gap:14px;flex-direction:column}
-  .metric{padding-inline:0;margin-bottom:0}
-  .metric b{font-size:22px}
-  .metric span{margin-top:3px;font-size:12.5px}
-  .metric:not(:first-child)::before{display:none}
+  .metrics{margin-top:30px;border-radius:17px}
+  .metric{padding:18px 20px}
+  .metric b{font-size:25px}
+  .metric > span{margin-top:6px;font-size:13px}
 
   /* --- заголовки разделов --- */
   .sec-head{max-width:100%}
@@ -702,11 +832,13 @@ h1.mega,.triad,.final h2{
   .bub.card b{font-size:14px}
   .chips i{font-size:10px;padding:4px 8px}
 
-  .chat-side{gap:9px;padding-top:0}
-  .side-card{padding:14px;border-radius:13px}
-  .side-card b{font-size:15px;margin-bottom:5px}
-  .side-card p{font-size:14px}
-  .side-card .n{font-size:10px;margin-bottom:6px}
+  .path{padding-top:4px}
+  .path li:not(:last-child)::after{left:15px;top:36px}
+  .path li{padding:0 0 26px 50px}
+  .path li::before{width:32px;height:32px;font-size:11px}
+  .path li.done::after{left:11px;top:9px;width:9px;height:5px}
+  .path b{font-size:17px;margin:3px 0 6px}
+  .path p{font-size:14.5px}
 
   .strike{margin-top:26px;font-size:17px;line-height:1.3;max-width:100%}
   .outcome{margin-top:14px;font-size:14.5px;max-width:100%}
@@ -791,26 +923,24 @@ h1.mega,.triad,.final h2{
    <div class="hero-grid">
     <div class="hero-text">
     <div class="eyebrow">Результат разговора — рабочий бот</div>
-    <h1 class="mega" id="head">Опиши, что ты хочешь.<br><span class="grad">Получи готового бота.</span></h1>
+    <h1 class="mega" id="head">Опиши, что нужно —<br><span class="grad">получи готового бота</span></h1>
 
     <p class="lede">
       Ты рассказываешь в Telegram, какой бот тебе нужен — текстом или голосом,
       как удобнее. <b>Через пятнадцать минут он уже работает 🚀</b>
     </p>
 
-    <p class="does">
-      Телефон разрывается во время работы, заказы теряются в переписке, одно и то же
-      каждый день руками — <b>бот забирает это себе.</b>
+    <p class="result-line">
+      <span class="tick" aria-hidden="true"></span>
+      Всё, что ты сейчас делаешь руками, бот возьмёт на себя.
     </p>
-
-    <p class="now">Не макет и не демо — <span class="grad">бот, который работает без тебя</span> прямо сейчас.</p>
 
     <div class="cta-row">
       <a class="btn btn-primary" href="https://t.me/boticsCREATOR_bot">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
         Создать бота в Telegram
       </a>
-      <a class="btn-link" href="#how">Посмотреть пример ↓</a>
+      <a class="btn-link" href="#who">Примеры задач ↓</a>
     </div>
 
     <p class="reassure">Без кода · без техзадания · без программиста</p>
@@ -864,15 +994,98 @@ h1.mega,.triad,.final h2{
     </div>
    </div>
 
-    <div class="metrics">
-      <div class="metric"><b class="grad">15 минут</b><span>до рабочего бота</span></div>
-      <div class="metric"><b class="grad">Готовый бот</b><span>с оплатой, базой клиентов и приложением</span></div>
-      <div class="metric"><b class="grad">0 строк кода</b><span>ты не напишешь и не увидишь</span></div>
+    <div class="metrics" id="metrics">
+      <div class="metric">
+        <b class="grad"><span class="count" data-to="15" data-from="0">15</span> минут</b>
+        <span>от первой фразы до рабочего бота</span>
+      </div>
+      <div class="metric">
+        <b class="grad">Готовый бот</b>
+        <span>с оплатой, базой клиентов и приложением</span>
+      </div>
+      <div class="metric">
+        <b class="grad"><span class="count" data-to="0" data-from="12480">0</span> строк кода</b>
+        <span>ты не напишешь и не увидишь</span>
+      </div>
     </div>
   </div>
 </header>
 
 <!-- ============ CHAT ============ -->
+<section class="who-sec" id="who">
+  <div class="wrap">
+    <div class="eyebrow">Примеры задач</div>
+    <h2>Скажи одну фразу —<br><span class="grad">получи бота, который работает за&nbsp;тебя</span></h2>
+    <p class="who-lede">
+      Так звучат задачи, с которыми приходят люди.
+      Каждая за пятнадцать минут превращается в&nbsp;бота.
+    </p>
+  </div>
+
+  <div class="rail" id="rail">
+    <div class="rail-row" data-dir="1">
+      <div class="rail-track">
+        <article class="case">
+          <p class="case-say">Хочу принимать заказы на торты: клиент выбирает начинку, дату и вносит предоплату</p>
+          <p class="case-got"><b>Кондитер</b> · каталог, предоплата, календарь занятых дат</p>
+        </article>
+        <article class="case">
+          <p class="case-say">Пусть бот проверяет подписку на канал и выдаёт промокод за неё</p>
+          <p class="case-got"><b>Промокоды</b> · проверка подписки, выдача, статистика</p>
+        </article>
+        <article class="case">
+          <p class="case-say">Мне нужен бот, который отвечает клиентам по моему прайсу и ведёт к оплате</p>
+          <p class="case-got"><b>Консультант</b> · читает твои файлы, отвечает, продаёт</p>
+        </article>
+        <article class="case">
+          <p class="case-say">Продаю PDF-гайды. Пусть бот берёт деньги и сразу отдаёт файл</p>
+          <p class="case-got"><b>Магазин файлов</b> · витрина, оплата картой, выдача</p>
+        </article>
+        <article class="case">
+          <p class="case-say">Закрытый клуб: оплатил — впустил, перестал платить — убрал</p>
+          <p class="case-got"><b>Платный доступ</b> · подписка, автопродление, контроль</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="rail-row" data-dir="-1">
+      <div class="rail-track">
+        <article class="case">
+          <p class="case-say">Хочу записывать клиентов в барбершоп и напоминать им за день</p>
+          <p class="case-got"><b>Запись</b> · выбор мастера, расписание, напоминания</p>
+        </article>
+        <article class="case">
+          <p class="case-say">Собирай заявки с сайта, а мне кидай в чат с телефоном и задачей</p>
+          <p class="case-got"><b>Заявки</b> · анкета, уведомление, база клиентов</p>
+        </article>
+        <article class="case">
+          <p class="case-say">Веду курс. Нужно раздавать уроки по расписанию и собирать домашки</p>
+          <p class="case-got"><b>Онлайн-курс</b> · уроки, проверка ДЗ, прогресс учеников</p>
+        </article>
+        <article class="case">
+          <p class="case-say">Наговариваю расходы голосом — пусть сам пишет в таблицу</p>
+          <p class="case-got"><b>Учёт денег</b> · голос, категории, отчёт в Excel</p>
+        </article>
+        <article class="case">
+          <p class="case-say">Бот должен выдавать договор с данными клиента и счёт на оплату</p>
+          <p class="case-got"><b>Документы</b> · анкета, готовый файл, отправка</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="who-more">
+      Это не список того, что бот умеет. Это <b>примеры чужих задач</b> —
+      твоя может быть совсем другой, и бот соберёт её так же.
+    </p>
+    <a class="btn btn-primary who-cta" href="https://t.me/boticsCREATOR_bot">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+      Рассказать свою задачу
+    </a>
+  </div>
+</section>
+
 <section class="chat-sec" id="how">
   <div class="wrap">
     <div class="sec-head rv">
@@ -892,23 +1105,20 @@ h1.mega,.triad,.final h2{
         </div>
       </div>
 
-      <div class="chat-side rv">
-        <div class="side-card">
-          <div class="n">01</div>
-          <b>Говоришь как человеку</b>
-          <p>Без форм, без техзадания и без слова «интеграция». Просто объясняешь, что нужно твоему делу.</p>
-        </div>
-        <div class="side-card">
-          <div class="n">02</div>
-          <b>Бот переспрашивает</b>
-          <p>Пару вопросов там, где есть развилка: брать оплату сразу или на месте, кто видит заявки.</p>
-        </div>
-        <div class="side-card">
-          <div class="n">03</div>
-          <b>Бот открывается и работает</b>
-          <p>Со своей базой и приложением внутри Telegram. Всё уже на месте.</p>
-        </div>
-      </div>
+      <ol class="path rv">
+        <li>
+          <b>Ты рассказываешь задачу</b>
+          <p>Как объяснил бы человеку. Без форм, без техзадания и без слова «интеграция».</p>
+        </li>
+        <li>
+          <b>Bot Creator уточняет детали</b>
+          <p>Пара вопросов там, где есть развилка: брать оплату сразу или на месте, кто видит заявки.</p>
+        </li>
+        <li class="done">
+          <b>Твой бот уже работает</b>
+          <p>Отдельный бот под твоё дело — со своей базой клиентов и приложением внутри Telegram.</p>
+        </li>
+      </ol>
     </div>
 
     <p class="strike rv">
@@ -926,9 +1136,9 @@ h1.mega,.triad,.final h2{
 <!-- ============ PIVOT ============ -->
 <section class="pivot">
   <div class="wrap">
-    <p class="imagine rv">Представь, что можешь вайб-кодить прямо в Telegram.</p>
+    <p class="imagine rv">Представь, что можешь <span class="nowrap">вайб&#8209;кодить</span> прямо в&nbsp;Telegram.</p>
     <h2 class="triad" id="triad">
-      <span class="line"><span class="thin">Только</span>&nbsp;<span class="pair"><span class="grad">быстрее</span><span class="thin">,</span></span> <span class="grad">без кода</span></span>
+      <span class="line"><span class="thin">Только</span>&nbsp;<span class="pair"><span class="grad">быстрее</span><span class="thin">,</span></span> <span class="grad">качественнее</span></span>
       <span class="line"><span class="thin">и</span>&nbsp;<span class="pair"><span class="grad">доступнее</span><span class="thin">.</span></span></span>
     </h2>
   </div>
@@ -956,13 +1166,13 @@ h1.mega,.triad,.final h2{
         <span class="ghost">02</span>
         <div class="lbl">
           <span class="num">АРГУМЕНТ 02</span>
-          <h3 class="grad">Без кода</h3>
+          <h3 class="grad">Качественнее</h3>
         </div>
         <div class="body">
-          <h4>Разбираться в разработке<br>не нужно.</h4>
-          <p>Ты описываешь задачу обычным языком — как объяснил бы её человеку. Ни строчки кода, ни техзадания.</p>
-          <p>Собирать с нуля тоже не придётся: <strong>все элементы уже готовы и проверены на живых ботах</strong>, их остаётся соединить под твою задачу.</p>
-          <p class="punch">Поэтому бот приходит собранным целиком&nbsp;— <span class="grad nowrap">а не «работает, но не до конца»</span>.</p>
+          <h4>Бот собран из проверенных частей,<br>а не написан наспех.</h4>
+          <p>Оплата, запись, напоминания, база клиентов — <strong>всё это уже отлажено на живых ботах</strong>. Твой бот собирается из этих частей, а не пишется с&nbsp;нуля.</p>
+          <p>Код писать не придётся. Ты просто рассказываешь, что нужно, как рассказал бы человеку.</p>
+          <p class="punch">Поэтому бот работает сразу, <span class="grad nowrap">а не «почти работает»</span>.</p>
         </div>
       </article>
 
@@ -1263,10 +1473,60 @@ h1.mega,.triad,.final h2{
     tio.observe(triad);
   }
 
+  /* ---- полоса цифр: свет за курсором ---- */
+  var mt = document.getElementById('metrics');
+  if (mt){
+    mt.addEventListener('pointermove', function(e){
+      var r = mt.getBoundingClientRect();
+      mt.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      mt.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  }
+
+  /* ---- цифры: оба счётчика стартуют вместе и приходят к итогу в один кадр ---- */
+  var counts = document.querySelectorAll('.count');
+  if (counts.length && mt && !reduce && 'IntersectionObserver' in window){
+    var fmt = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'); };
+    counts.forEach(function(el){ el.textContent = fmt(+el.dataset.from); });
+    var DUR = 1800;
+    var cio = new IntersectionObserver(function(es){
+      if (!es.some(function(e){ return e.isIntersecting; })) return;
+      cio.disconnect();
+      var t0 = null;
+      (function step(ts){
+        if (t0 === null) t0 = ts;
+        var k = Math.min(1, (ts - t0) / DUR);
+        counts.forEach(function(el){
+          var a = +el.dataset.from, b = +el.dataset.to, v;
+          if (b > a){
+            /* «15 минут»: ровные шаги, «15» появляется только в последний кадр */
+            v = k < 1 ? Math.min(b - 1, Math.floor(a + (b - a) * k)) : b;
+          } else {
+            /* «0 строк»: быстро вниз и плавное торможение, «0» тоже только в конце */
+            var e = 1 - Math.pow(1 - k, 4);
+            v = k < 1 ? Math.max(b + 1, Math.ceil(a + (b - a) * e)) : b;
+          }
+          el.textContent = fmt(v);
+        });
+        if (k < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }, {threshold:.5});
+    cio.observe(mt);
+  }
+
+  /* ---- лента примеров: удваиваем содержимое, чтобы шов был не виден ---- */
+  document.querySelectorAll('.rail-track').forEach(function(tr){
+    var html = tr.innerHTML;
+    tr.insertAdjacentHTML('beforeend', html);
+    tr.querySelectorAll('.case').forEach(function(c,i,all){
+      if (i >= all.length/2) c.setAttribute('aria-hidden','true');
+    });
+  });
+
   /* ---- chat playback ---- */
   var stream = document.getElementById('stream');
   var script = [
-    {who:'bot',  text:'Привет! Опиши, какой бот тебе нужен — текстом или голосом.'},
+    {who:'bot',  text:'Привет! Опиши, какой бот тебе нужен — текстом, голосом или файлом.'},
     {who:'usr',  text:'Хочу бота для барбершопа: клиент сам выбирает мастера и время, записывается, а мне приходит уведомление о записи'},
     {who:'bot',  text:'Понял. Оплата сразу при записи или на месте?'},
     {who:'usr',  text:'Сразу картой'},
