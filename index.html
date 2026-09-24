@@ -212,14 +212,20 @@ h1.mega .w{display:inline-block;will-change:transform,opacity}
 }
 
 .rail{margin:clamp(34px,4.4vw,50px) 0 clamp(28px,3.6vw,40px);display:grid;gap:14px}
-.rail-row{overflow:hidden;padding-block:8px;margin-block:-8px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.rail-row{overflow:hidden;padding-block:8px;margin-block:-8px;position:relative}
+.rail-row::before,.rail-row::after{
+  content:"";position:absolute;top:0;bottom:0;width:7%;z-index:2;pointer-events:none;
+}
+.rail-row::before{left:0;background:linear-gradient(90deg,var(--void),transparent)}
+.rail-row::after{right:0;background:linear-gradient(270deg,var(--void),transparent)}
 .rail-track{
   display:flex;gap:14px;width:max-content;
   animation:railmove 52s linear infinite;
+  will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;
 }
 .rail-row[data-dir="-1"] .rail-track{animation-direction:reverse}
 .rail-row:hover .rail-track{animation-play-state:paused}
-@keyframes railmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes railmove{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
 .case{
   flex:none;width:min(370px,78vw);
@@ -767,11 +773,13 @@ h1.mega,.triad,.final h2{
   .cta-row .btn-primary,.final .btn-primary{animation:none}
   .result-line{font-size:15px;align-items:flex-start}
   .result-line .tick{margin-top:1px}
-  .rail{margin:26px 0 22px;gap:11px}
-  .case{width:min(300px,82vw);padding:17px 18px 15px;border-radius:14px}
-  .case-say{font-size:15.5px}
-  .case-got{font-size:13.5px;margin-top:12px;padding-top:10px}
-  .case-got b{font-size:14.5px}
+  .rail{margin:24px 0 22px;gap:9px}
+  .case{width:min(236px,62vw);padding:14px 15px 13px;border-radius:13px}
+  .rail-track{gap:10px}
+  .rail-row::before,.rail-row::after{width:5%}
+  .case-say{font-size:14px;line-height:1.42;padding-left:12px}
+  .case-got{font-size:12.5px;margin-top:10px;padding-top:9px}
+  .case-got b{font-size:13.5px}
   .who-lede{font-size:16px}
   .who-sec h2{font-size:25px;line-height:1.15}
   .who-more{font-size:15.5px;margin-bottom:18px}
@@ -1489,9 +1497,9 @@ h1.mega,.triad,.final h2{
     var fmt = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'); };
     counts.forEach(function(el){ el.textContent = fmt(+el.dataset.from); });
     var DUR = 1800;
-    var cio = new IntersectionObserver(function(es){
+    var countIO = new IntersectionObserver(function(es){
       if (!es.some(function(e){ return e.isIntersecting; })) return;
-      cio.disconnect();
+      countIO.disconnect();
       var t0 = null;
       (function step(ts){
         if (t0 === null) t0 = ts;
@@ -1511,7 +1519,7 @@ h1.mega,.triad,.final h2{
         if (k < 1) requestAnimationFrame(step);
       })(performance.now());
     }, {threshold:.5});
-    cio.observe(mt);
+    countIO.observe(mt);
   }
 
   /* ---- лента примеров: удваиваем содержимое, чтобы шов был не виден ---- */
@@ -1526,7 +1534,7 @@ h1.mega,.triad,.final h2{
   /* ---- chat playback ---- */
   var stream = document.getElementById('stream');
   var script = [
-    {who:'bot',  text:'Привет! Опиши, какой бот тебе нужен — текстом, голосом или файлом.'},
+    {who:'bot',  text:'Привет! Расскажи, какой бот тебе нужен: напиши, наговори голосом или пришли файл.'},
     {who:'usr',  text:'Хочу бота для барбершопа: клиент сам выбирает мастера и время, записывается, а мне приходит уведомление о записи'},
     {who:'bot',  text:'Понял. Оплата сразу при записи или на месте?'},
     {who:'usr',  text:'Сразу картой'},
