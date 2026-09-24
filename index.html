@@ -799,9 +799,8 @@ h1.mega,.triad,.final h2{
   /* --- первый экран --- */
   .hero{padding:78px 0 44px}
   .hero-grid{grid-template-columns:1fr;gap:18px}
-  .hero-orb{order:-1}
-  .hero-orb svg{width:168px}                 /* было полэкрана — стало значок */
-  .hero-orb::before{width:190px;filter:blur(28px)}
+  /* на телефоне сферы нет: первый экран сразу начинается с заголовка */
+  .hero-orb{display:none}
 
   h1.mega{font-size:35px;line-height:1.1;letter-spacing:-1.1px;max-width:100%}
   .lede{margin-top:14px;font-size:17.5px;max-width:100%;line-height:1.45}
@@ -1267,7 +1266,7 @@ h1.mega,.triad,.final h2{
 
   /* ---- сфера-нейросеть: живая, вращается и дышит ---- */
   var orb = document.getElementById('orbnet');
-  if (orb){
+  if (orb && matchMedia('(min-width:641px)').matches){
     var NS='http://www.w3.org/2000/svg', CX=100, CY=100, R=80;
     var M=110, ga=Math.PI*(3-Math.sqrt(5)), base=[];
     for (var n=0;n<M;n++){
