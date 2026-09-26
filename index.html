@@ -213,6 +213,8 @@ h1.mega .w{display:inline-block;will-change:transform,opacity}
 
 .rail{margin:clamp(34px,4.4vw,50px) 0 clamp(28px,3.6vw,40px);display:grid;gap:14px}
 .rail-row{overflow:hidden;padding-block:8px;margin-block:-8px;position:relative}
+.rail.is-live .rail-row{touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
+.rail.is-live .rail-row.grabbing{cursor:grabbing}
 .rail-row::before,.rail-row::after{
   content:"";position:absolute;top:0;bottom:0;width:7%;z-index:2;pointer-events:none;
 }
@@ -1348,7 +1350,7 @@ h1.mega,.triad,.final h2{
       <details class="rv"><summary>Сколько времени уходит на сборку бота?<i></i></summary><p>Сначала короткий разговор: бот уточнит детали и покажет, как понял задачу. После твоего «да» сборка обычно занимает 5–10&nbsp;минут, и бот сам напишет, когда всё готово.</p></details>
       <details class="rv"><summary>Нужно ли регистрировать бота в BotFather?<i></i></summary><p>Нет. Бот появится сам, токены и настройки не понадобятся. Имя предложим, а ты поменяешь, если захочешь.</p></details>
       <details class="rv"><summary>Что будет, если бот сломается?<i></i></summary><p>Он заметит ошибку и починит себя сам, а тебе придёт сообщение, что случилось. Автопочинка работает на всех тарифах и без ограничений.</p></details>
-      <details class="rv"><summary>Можно потом что-то поменять?<i></i></summary><p>Да. Нажимаешь «Изменить бота» и пишешь или наговариваешь, что поправить. Бот покажет, что изменится, и сделает правку после твоего подтверждения.</p></details>
+      <details class="rv"><summary>Можно ли изменить бота после создания?<i></i></summary><p>Да. Нажимаешь «Изменить бота» и пишешь или наговариваешь, что поправить. Бот покажет, что изменится, и сделает правку после твоего подтверждения.</p></details>
       <details class="rv"><summary>Как принимать оплату от клиентов?<i></i></summary><p>Подключаешь кассу ЮKassa или CloudPayments прямо в чате с Bot Creator. Клиент платит картой в самом боте, не уходя в другие приложения.</p></details>
       <details class="rv"><summary>Где смотреть заявки, записи и оплаты?<i></i></summary><p>В мини-приложении бота. Там всё, что он наработал: клиенты, заявки, записи и деньги. Данные можно выгрузить в Excel.</p></details>
       <details class="rv"><summary>А если бот не умеет того, что мне нужно?<i></i></summary><p>Он скажет об этом прямо ещё в разговоре и предложит, как решить задачу иначе. Например, вместо звонка клиенту бот примет заявку и сразу пришлёт её тебе.</p></details>
@@ -1687,11 +1689,36 @@ h1.mega,.triad,.final h2{
     addEventListener('resize', function(){ layout(); }, {passive:true});
 
     rows.forEach(function(r){
+      r.vel = 0; r.drag = null;
       r.row.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') r.paused = true; });
-      r.row.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse') r.paused = false; });
-      /* на телефоне палец держит ленту, пока лежит на ней, и чуть после */
-      r.row.addEventListener('touchstart', function(){ r.paused = true; }, {passive:true});
-      r.row.addEventListener('touchend', function(){ r.paused = false; r.resumeAt = performance.now() + 1200; }, {passive:true});
+      r.row.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse' && !r.drag) r.paused = false; });
+      /* ленту можно остановить и пролистать пальцем или мышью; после отпускания
+         она докатывается по инерции и через секунду едет сама дальше */
+      r.row.addEventListener('pointerdown', function(e){
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        r.drag = {x:e.clientX, t:e.timeStamp, id:e.pointerId, cap:false};
+        r.paused = true; r.vel = 0;
+      });
+      r.row.addEventListener('pointermove', function(e){
+        var d = r.drag;
+        if (!d || e.pointerId !== d.id) return;
+        var dx = e.clientX - d.x, dt = Math.max(1, e.timeStamp - d.t);
+        if (!d.cap && Math.abs(dx) > 3){
+          d.cap = true; r.row.classList.add('grabbing');
+          try { r.row.setPointerCapture(e.pointerId); } catch (_) {}
+        }
+        r.off += dx; r.vel = Math.max(-3, Math.min(3, dx / dt));
+        d.x = e.clientX; d.t = e.timeStamp;
+      });
+      var release = function(e){
+        if (!r.drag) return;
+        if (e.timeStamp - r.drag.t > 80) r.vel = 0;     /* палец замер перед отпусканием — без броска */
+        r.drag = null; r.row.classList.remove('grabbing');
+        r.paused = e.pointerType === 'mouse' && r.row.matches(':hover');
+        r.resumeAt = performance.now() + 1200;
+      };
+      r.row.addEventListener('pointerup', release);
+      r.row.addEventListener('pointercancel', release);
     });
 
     var visible = true;
@@ -1704,7 +1731,10 @@ h1.mega,.triad,.final h2{
       if (visible){
         var mobile = innerWidth <= 640;
         rows.forEach(function(r){
-          if (!r.paused && now >= r.resumeAt){
+          if (!r.drag && Math.abs(r.vel) > 0.005){
+            r.off += r.vel * dt; r.vel *= Math.pow(0.94, dt / 16);
+          }
+          if (!r.paused && !r.drag && now >= r.resumeAt){
             /* скорость прежняя: полный круг за 52 с (на телефоне за 38 с) */
             r.off += r.dir * (r.total / (mobile ? 38000 : 52000)) * dt * -1;
           }
