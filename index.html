@@ -607,6 +607,77 @@ section{position:relative;padding-block:112px}
 .tile.more .ico{background:linear-gradient(150deg,rgba(255,61,113,.3),rgba(255,138,0,.14));border-color:rgba(255,107,143,.5)}
 .tile.more .ico svg{color:#ffb0c4}
 
+/* ======================= ЦЕНЫ ======================= */
+.price-sec{border-top:1px solid var(--edge)}
+.plans{
+  margin-top:52px;display:grid;gap:14px;align-items:stretch;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.plan{
+  position:relative;display:flex;flex-direction:column;
+  padding:30px 28px 28px;border-radius:22px;
+  background:linear-gradient(168deg,rgba(28,26,35,.92),rgba(15,14,20,.9));
+  border:1px solid var(--edge);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 26px 70px rgba(0,0,0,.45);
+  transition:transform .26s cubic-bezier(.2,.8,.3,1),border-color .26s;
+}
+.plan:hover{transform:translateY(-4px);border-color:var(--edge-2)}
+.plan-name{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+.plan-bots{margin-top:14px;font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:-.02em}
+.plan-price{margin-top:22px;display:flex;align-items:baseline;gap:8px;font-family:var(--display)}
+.plan-price b{font-size:clamp(40px,4.4vw,52px);font-weight:700;letter-spacing:-.035em;line-height:1}
+.plan-price span{font-size:16px;color:var(--grey);font-family:var(--body)}
+.plan ul{list-style:none;margin:24px 0 28px;padding:22px 0 0;border-top:1px solid var(--edge);display:grid;gap:11px}
+.plan li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--grey);line-height:1.45}
+.plan li svg{width:17px;height:17px;flex:none;margin-top:2px;color:var(--iris-hi)}
+.plan .btn{margin-top:auto;justify-content:center}
+.plan.hot{
+  border-color:rgba(255,107,143,.5);
+  background:
+    radial-gradient(120% 70% at 50% 0%,rgba(255,61,113,.2),transparent 62%),
+    linear-gradient(168deg,rgba(34,24,33,.96),rgba(18,14,20,.94));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 90px rgba(255,61,113,.18),0 26px 70px rgba(0,0,0,.5);
+}
+.plan.hot .plan-name{color:var(--white)}
+.plan-tag{
+  position:absolute;top:-13px;left:28px;padding:6px 12px;border-radius:99px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;
+  background:linear-gradient(112deg,var(--iris),var(--violet));box-shadow:0 8px 24px rgba(255,61,113,.4);
+}
+.plans-note{margin-top:26px;color:var(--grey);font-size:15.5px;line-height:1.6;max-width:70ch}
+.plans-note b{color:var(--white);font-weight:500}
+@media (max-width:900px){
+  .plans{grid-template-columns:1fr;gap:22px;max-width:460px}
+}
+
+/* ======================= ВОПРОСЫ ======================= */
+.faq-sec{border-top:1px solid var(--edge)}
+.faq{margin-top:44px;max-width:820px;border-top:1px solid var(--edge)}
+.faq details{border-bottom:1px solid var(--edge)}
+.faq summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;
+  padding:22px 2px;font-family:var(--display);font-size:clamp(17px,2vw,20px);font-weight:600;letter-spacing:-.015em;
+  transition:color .2s;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--iris-hi)}
+.faq summary i{
+  flex:none;width:30px;height:30px;border-radius:50%;position:relative;
+  border:1px solid var(--edge-2);transition:transform .3s cubic-bezier(.2,.8,.3,1),border-color .2s,background .2s;
+}
+.faq summary i::before,.faq summary i::after{
+  content:"";position:absolute;left:50%;top:50%;width:12px;height:1.6px;border-radius:2px;
+  background:var(--white);transform:translate(-50%,-50%);
+}
+.faq summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:opacity .2s}
+.faq details[open] summary i{transform:rotate(180deg);border-color:var(--iris-hi);background:rgba(255,61,113,.12)}
+.faq details[open] summary i::after{opacity:0}
+.faq details p{margin:0 0 24px;padding-right:48px;color:var(--grey);font-size:16.5px;line-height:1.6;max-width:64ch}
+@media (max-width:640px){
+  .faq summary{padding:18px 0}
+  .faq details p{padding-right:0;font-size:15.5px}
+}
+
 /* ======================= FINAL ======================= */
 .final{
   text-align:center;padding-block:140px;position:relative;overflow:hidden;
@@ -1113,7 +1184,7 @@ h1.mega,.triad,.final h2{
   <div class="wrap">
     <div class="sec-head rv">
       <span class="mono">От идеи до бота — один разговор</span>
-      <h2>Вот что ты получишь<br>на выходе.</h2>
+      <h2>Как это работает</h2>
       <p>Рассказываешь задачу обычными словами. Бот уточняет детали — и собирает решение.</p>
     </div>
 
@@ -1222,6 +1293,63 @@ h1.mega,.triad,.final h2{
         </div>
       </article>
 
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ ЦЕНЫ ============ -->
+<section class="price-sec" id="price">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="mono">Цены</span>
+      <h2>Одна подписка.<br><span class="grad">Всё уже внутри.</span></h2>
+      <p>Платишь не за создание бота, а за то, что он работает: серверы, починку и правки мы берём на себя.</p>
+    </div>
+    <div class="plans">
+      <article class="plan rv">
+        <span class="plan-name">Старт</span>
+        <div class="plan-bots">1 бот</div>
+        <div class="plan-price"><b>1 199&nbsp;₽</b><span>в месяц</span></div>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Мини-приложение к каждому боту</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Бот сам чинится, если что-то сломалось</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Правки по твоей просьбе</li></ul>
+        <a class="btn btn-ghost" href="https://t.me/boticsCREATOR_bot">Начать</a>
+      </article>
+      <article class="plan hot rv">
+        <span class="plan-tag">Оптимальный</span><span class="plan-name">Бизнес</span>
+        <div class="plan-bots">До 3 ботов</div>
+        <div class="plan-price"><b>2 199&nbsp;₽</b><span>в месяц</span></div>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Мини-приложение к каждому боту</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Бот сам чинится, если что-то сломалось</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Правки по твоей просьбе</li></ul>
+        <a class="btn btn-primary" href="https://t.me/boticsCREATOR_bot">Начать</a>
+      </article>
+      <article class="plan rv">
+        <span class="plan-name">Про</span>
+        <div class="plan-bots">До 7 ботов</div>
+        <div class="plan-price"><b>5 499&nbsp;₽</b><span>в месяц</span></div>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Мини-приложение к каждому боту</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Бот сам чинится, если что-то сломалось</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Правки по твоей просьбе</li></ul>
+        <a class="btn btn-ghost" href="https://t.me/boticsCREATOR_bot">Начать</a>
+      </article>
+    </div>
+    <p class="plans-note rv">Для сравнения: фрилансер берёт <b>от 2 до 20 тысяч</b> за бота, студия&nbsp;— <b>от 50 тысяч</b>, и за каждую правку потом платишь отдельно. Число правок зависит от тарифа.</p>
+  </div>
+</section>
+
+
+<!-- ============ ВОПРОСЫ ============ -->
+<section class="faq-sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="mono">Вопросы</span>
+      <h2>Частые вопросы</h2>
+    </div>
+    <div class="faq">
+      <details class="rv"><summary>Нужны ли специальные знания или навыки программирования?<i></i></summary><p>Нет, никаких. Ты рассказываешь, что нужно, текстом или голосовым, как объяснил бы человеку. Код бот пишет сам, и видеть его тебе не придётся.</p></details>
+      <details class="rv"><summary>Сколько времени уходит на сборку бота?<i></i></summary><p>Сначала короткий разговор: бот уточнит детали и покажет, как понял задачу. После твоего «да» сборка обычно занимает 5–10&nbsp;минут, и бот сам напишет, когда всё готово.</p></details>
+      <details class="rv"><summary>Нужно ли регистрировать бота в BotFather?<i></i></summary><p>Нет. Бот появится сам, токены и настройки не понадобятся. Имя предложим, а ты поменяешь, если захочешь.</p></details>
+      <details class="rv"><summary>Что будет, если бот сломается?<i></i></summary><p>Он заметит ошибку и починит себя сам, а тебе придёт сообщение, что случилось. Автопочинка работает на всех тарифах и без ограничений.</p></details>
+      <details class="rv"><summary>Можно потом что-то поменять?<i></i></summary><p>Да. Нажимаешь «Изменить бота» и пишешь или наговариваешь, что поправить. Бот покажет, что изменится, и сделает правку после твоего подтверждения.</p></details>
+      <details class="rv"><summary>Как принимать оплату от клиентов?<i></i></summary><p>Подключаешь кассу ЮKassa или CloudPayments прямо в чате с Bot Creator. Клиент платит картой в самом боте, не уходя в другие приложения.</p></details>
+      <details class="rv"><summary>Где смотреть заявки, записи и оплаты?<i></i></summary><p>В мини-приложении бота. Там всё, что он наработал: клиенты, заявки, записи и деньги. Данные можно выгрузить в Excel.</p></details>
+      <details class="rv"><summary>А если бот не умеет того, что мне нужно?<i></i></summary><p>Он скажет об этом прямо ещё в разговоре и предложит, как решить задачу иначе. Например, вместо звонка клиенту бот примет заявку и сразу пришлёт её тебе.</p></details>
     </div>
   </div>
 </section>
