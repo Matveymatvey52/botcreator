@@ -243,14 +243,17 @@ h1.mega .w{display:inline-block;will-change:transform,opacity}
   content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;border-radius:2px;
   background:linear-gradient(180deg,var(--iris),var(--cyan));
 }
+.case{display:flex;flex-direction:column}
+.case-say{margin-bottom:14px}
 .case-got{
-  margin:14px 0 0;padding-top:12px;border-top:1px solid var(--edge);
-  font-size:14.5px;color:var(--dim);line-height:1.5;
+  margin:auto 0 0;padding-top:12px;border-top:1px solid var(--edge);
+  font-size:14.5px;color:var(--dim);line-height:1.45;
 }
 .case-got b{
-  display:inline-block;color:var(--white);font-family:var(--display);
-  font-weight:600;font-size:15.5px;margin-right:2px;
+  display:block;color:var(--white);font-family:var(--display);
+  font-weight:600;font-size:15.5px;margin-bottom:3px;
 }
+.case-got span{display:block}
 
 .who-more{
   margin:0 0 22px;max-width:56ch;
@@ -779,7 +782,8 @@ h1.mega,.triad,.final h2{
   .rail-track{gap:10px}
   .rail-row::before,.rail-row::after{width:5%}
   .case-say{font-size:14px;line-height:1.42;padding-left:12px}
-  .case-got{font-size:12.5px;margin-top:10px;padding-top:9px}
+  .case-say{margin-bottom:10px}
+  .case-got{font-size:12.5px;padding-top:9px}
   .case-got b{font-size:13.5px}
   .who-lede{font-size:16px}
   .who-sec h2{font-size:25px;line-height:1.15}
@@ -1034,23 +1038,31 @@ h1.mega,.triad,.final h2{
       <div class="rail-track">
         <article class="case">
           <p class="case-say">Хочу принимать заказы на торты: клиент выбирает начинку, дату и вносит предоплату</p>
-          <p class="case-got"><b>Кондитер</b> · каталог, предоплата, календарь занятых дат</p>
+          <p class="case-got"><b>Кондитер</b><span>Покажет начинки, возьмёт предоплату и не даст занять одну дату дважды</span></p>
         </article>
         <article class="case">
           <p class="case-say">Пусть бот проверяет подписку на канал и выдаёт промокод за неё</p>
-          <p class="case-got"><b>Промокоды</b> · проверка подписки, выдача, статистика</p>
+          <p class="case-got"><b>Промокоды</b><span>Проверит подписку и выдаст код только тому, кто подписан</span></p>
         </article>
         <article class="case">
           <p class="case-say">Мне нужен бот, который отвечает клиентам по моему прайсу и ведёт к оплате</p>
-          <p class="case-got"><b>Консультант</b> · читает твои файлы, отвечает, продаёт</p>
+          <p class="case-got"><b>Консультант</b><span>Прочитает твой прайс, ответит клиенту и пришлёт ссылку на оплату</span></p>
         </article>
         <article class="case">
           <p class="case-say">Продаю PDF-гайды. Пусть бот берёт деньги и сразу отдаёт файл</p>
-          <p class="case-got"><b>Магазин файлов</b> · витрина, оплата картой, выдача</p>
+          <p class="case-got"><b>Магазин файлов</b><span>Покажет гайды, примет оплату картой и сразу отдаст файл</span></p>
         </article>
         <article class="case">
           <p class="case-say">Закрытый клуб: оплатил — впустил, перестал платить — убрал</p>
-          <p class="case-got"><b>Платный доступ</b> · подписка, автопродление, контроль</p>
+          <p class="case-got"><b>Платный доступ</b><span>Впустит после оплаты и уберёт, если человек не продлил</span></p>
+        </article>
+        <article class="case">
+          <p class="case-say">Хочу, чтобы бот сам вёл человека от первого вопроса до покупки</p>
+          <p class="case-got"><b>Воронка продаж</b><span>Расскажет о товаре по шагам, ответит на сомнения и подведёт к оплате</span></p>
+        </article>
+        <article class="case">
+          <p class="case-say">Хочу начислять клиентам баллы за покупки и за приведённых друзей</p>
+          <p class="case-got"><b>Лояльность</b><span>Начислит баллы, выдаст промокод и запомнит, кто кого пригласил</span></p>
         </article>
       </div>
     </div>
@@ -1059,23 +1071,27 @@ h1.mega,.triad,.final h2{
       <div class="rail-track">
         <article class="case">
           <p class="case-say">Хочу записывать клиентов в барбершоп и напоминать им за день</p>
-          <p class="case-got"><b>Запись</b> · выбор мастера, расписание, напоминания</p>
+          <p class="case-got"><b>Запись</b><span>Покажет свободное время мастеров и напомнит клиенту о визите</span></p>
         </article>
         <article class="case">
           <p class="case-say">Собирай заявки с сайта, а мне кидай в чат с телефоном и задачей</p>
-          <p class="case-got"><b>Заявки</b> · анкета, уведомление, база клиентов</p>
+          <p class="case-got"><b>Заявки</b><span>Расспросит клиента и пришлёт тебе заявку с телефоном в чат</span></p>
         </article>
         <article class="case">
           <p class="case-say">Веду курс. Нужно раздавать уроки по расписанию и собирать домашки</p>
-          <p class="case-got"><b>Онлайн-курс</b> · уроки, проверка ДЗ, прогресс учеников</p>
+          <p class="case-got"><b>Онлайн-курс</b><span>Раздаст уроки по расписанию, соберёт домашки и покажет, кто отстаёт</span></p>
         </article>
         <article class="case">
           <p class="case-say">Наговариваю расходы голосом — пусть сам пишет в таблицу</p>
-          <p class="case-got"><b>Учёт денег</b> · голос, категории, отчёт в Excel</p>
+          <p class="case-got"><b>Учёт денег</b><span>Разберёт голосовое, разложит траты по статьям и выгрузит в Excel</span></p>
         </article>
         <article class="case">
           <p class="case-say">Бот должен выдавать договор с данными клиента и счёт на оплату</p>
-          <p class="case-got"><b>Документы</b> · анкета, готовый файл, отправка</p>
+          <p class="case-got"><b>Документы</b><span>Спросит данные клиента и пришлёт договор и счёт готовым файлом</span></p>
+        </article>
+        <article class="case">
+          <p class="case-say">Хочу провести конкурс в канале: вопросы, баллы и победитель</p>
+          <p class="case-got"><b>Викторина</b><span>Задаст вопросы, посчитает баллы и назовёт победителей</span></p>
         </article>
       </div>
     </div>
@@ -1210,35 +1226,6 @@ h1.mega,.triad,.final h2{
   </div>
 </section>
 
-<!-- ============ EXAMPLES ============ -->
-<section style="border-top:1px solid var(--edge)">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="mono">Что собирают здесь</span>
-      <h2>Какого бота<br>можно создать?</h2>
-      <p>Практически любого под твою задачу: консультант, продажи, заявки, оплаты, документы, подписки&nbsp;— или твой собственный сценарий.</p>
-    </div>
-
-    <div class="tiles" id="tiles">
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></div><b>ИИ-консультант</b><span>Читает твои документы и отвечает клиентам, как живой эксперт</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3Z"/></svg></div><b>Умная воронка продаж</b><span>Ведёт клиента по шагам и сам подводит к покупке</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5M12 18v-6M9 15l3 3 3-3"/></svg></div><b>Продажа гайдов</b><span>Оплатил — файл пришёл сразу, без тебя</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><b>Курс с домашками</b><span>Сам видит, кто сдал и уложился в срок, проверяет файлы и ставит оценки</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg></div><b>Голосовой секретарь</b><span>Наговорил задачи — они легли по темам и исполнителям</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10Z"/></svg></div><b>Сбор лидов с сайта</b><span>Заявка с формы на сайте сразу прилетает в Telegram</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg></div><b>Викторина с баллами</b><span>Проверяет знания и сам считает результат каждого участника</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><b>Подписка на контент</b><span>Оплатил — получил доступ к материалам, без ручной выдачи</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m12 2 3 6.5 7 .9-5 4.8 1.2 7-6.2-3.4L5.8 21 7 14.2 2 9.4l7-.9Z"/></svg></div><b>Лояльность</b><span>Баллы, промокоды, реферальные приглашения</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6M9 9h1"/></svg></div><b>Генератор документов</b><span>Клиент заполнил анкету у тебя в боте — файл готов уже через минуту</span></div>
-      <div class="tile rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div><b>Проверка подписки на канал</b><span>Пускает к контенту или выдаёт промокод на скидку только тем, кто подписан</span></div>
-      <div class="tile more rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Z"/></svg></div><b class="grad">Твоя идея</b><span>расскажи — и она станет ботом</span></div>
-    </div>
-
-    <p class="after-tiles rv">
-      Не нашёл подходящего варианта? <b>Расскажи свою идею&nbsp;— бот соберёт её под тебя.</b>
-    </p>
-  </div>
-</section>
 
 <!-- ============ FINAL ============ -->
 <section class="final" id="start">
@@ -1535,6 +1522,7 @@ h1.mega,.triad,.final h2{
               dir:+row.dataset.dir || 1, off:0, paused:false, resumeAt:0};
     });
     var layout = function(){
+      rail.querySelectorAll('.case').forEach(function(c){ c.style.height = ''; });
       rows.forEach(function(r){
         var gap = parseFloat(getComputedStyle(r.track).columnGap) || 14;
         /* карточек должно хватать на ширину экрана плюс одну въезжающую:
@@ -1555,7 +1543,13 @@ h1.mega,.triad,.final h2{
         });
         r.total = x;
         r.maxW = Math.max.apply(null, r.cards.map(function(c){ return c.offsetWidth; }));
-        r.track.style.height = h + 'px';
+        r.h = h;
+      });
+      /* все карточки одной высоты: текст разной длины не должен делать ленту рваной */
+      var H = Math.max.apply(null, rows.map(function(r){ return r.h; }));
+      rows.forEach(function(r){
+        r.cards.forEach(function(c){ c.style.height = H + 'px'; });
+        r.track.style.height = H + 'px';
       });
     };
     rail.classList.add('is-live');
