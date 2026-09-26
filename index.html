@@ -1694,31 +1694,63 @@ h1.mega,.triad,.final h2{
       r.row.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse' && !r.drag) r.paused = false; });
       /* ленту можно остановить и пролистать пальцем или мышью; после отпускания
          она докатывается по инерции и через секунду едет сама дальше */
-      r.row.addEventListener('pointerdown', function(e){
-        if (e.pointerType === 'mouse' && e.button !== 0) return;
-        r.drag = {x:e.clientX, t:e.timeStamp, id:e.pointerId, cap:false};
+      var grab = function(x, t, id){
+        r.drag = {x:x, t:t, id:id, cap:false};
         r.paused = true; r.vel = 0;
+      };
+      var move = function(x, t){
+        var d = r.drag, dx = x - d.x, dt = Math.max(1, t - d.t);
+        r.off += dx; r.vel = Math.max(-3, Math.min(3, dx / dt));
+        d.x = x; d.t = t;
+      };
+      var release = function(t, mouse){
+        if (!r.drag) return;
+        if (t - r.drag.t > 80) r.vel = 0;     /* палец замер перед отпусканием — без броска */
+        r.drag = null; r.row.classList.remove('grabbing');
+        r.paused = mouse && r.row.matches(':hover');
+        r.resumeAt = performance.now() + 1200;
+      };
+
+      /* мышь — через pointer-события */
+      r.row.addEventListener('pointerdown', function(e){
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        grab(e.clientX, e.timeStamp, e.pointerId);
       });
       r.row.addEventListener('pointermove', function(e){
         var d = r.drag;
-        if (!d || e.pointerId !== d.id) return;
-        var dx = e.clientX - d.x, dt = Math.max(1, e.timeStamp - d.t);
-        if (!d.cap && Math.abs(dx) > 3){
+        if (!d || d.id !== e.pointerId) return;
+        if (!d.cap && Math.abs(e.clientX - d.x) > 3){
           d.cap = true; r.row.classList.add('grabbing');
           try { r.row.setPointerCapture(e.pointerId); } catch (_) {}
         }
-        r.off += dx; r.vel = Math.max(-3, Math.min(3, dx / dt));
-        d.x = e.clientX; d.t = e.timeStamp;
+        move(e.clientX, e.timeStamp);
       });
-      var release = function(e){
-        if (!r.drag) return;
-        if (e.timeStamp - r.drag.t > 80) r.vel = 0;     /* палец замер перед отпусканием — без броска */
-        r.drag = null; r.row.classList.remove('grabbing');
-        r.paused = e.pointerType === 'mouse' && r.row.matches(':hover');
-        r.resumeAt = performance.now() + 1200;
-      };
-      r.row.addEventListener('pointerup', release);
-      r.row.addEventListener('pointercancel', release);
+      var mouseUp = function(e){ if (r.drag && r.drag.id === e.pointerId) release(e.timeStamp, true); };
+      r.row.addEventListener('pointerup', mouseUp);
+      r.row.addEventListener('pointercancel', mouseUp);
+
+      /* палец — через touch-события: так надёжно и на iPhone. Направление
+         решается по первым пикселям: вбок — листаем ленту, вверх-вниз — страницу */
+      r.row.addEventListener('touchstart', function(e){
+        var p = e.touches[0];
+        grab(p.clientX, e.timeStamp, 'touch');
+        r.drag.y = p.clientY; r.drag.x0 = p.clientX; r.drag.way = null;
+      }, {passive:true});
+      r.row.addEventListener('touchmove', function(e){
+        var d = r.drag;
+        if (!d || d.id !== 'touch') return;
+        var p = e.touches[0];
+        if (!d.way){
+          var ax = Math.abs(p.clientX - d.x0), ay = Math.abs(p.clientY - d.y);
+          if (ax < 6 && ay < 6) return;
+          d.way = ax > ay ? 'x' : 'y';
+        }
+        if (d.way === 'y'){ release(e.timeStamp, false); return; }
+        e.preventDefault();
+        move(p.clientX, e.timeStamp);
+      }, {passive:false});
+      r.row.addEventListener('touchend', function(e){ release(e.timeStamp, false); }, {passive:true});
+      r.row.addEventListener('touchcancel', function(e){ release(e.timeStamp, false); }, {passive:true});
     });
 
     var visible = true;
